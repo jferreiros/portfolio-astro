@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/ProyectCard.astro';
+import projects from '../data/proyects.json';
+---
+
+<Layout title="Joaquin Ferreiros - My Projects & Work">
+  <section class="timeline-container">
+    <h1 class="timeline-title">My Projects & Work</h1>
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      {projects.map((project, index) => (
+        <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+          <div class="timeline-item-content">
+            <div class="card-container">
+              <Card {...project} />
+            </div>
+            <span class="connector"></span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .timeline-container {
+      text-align: center;
+      padding: 50px 20px;
+      width: 100%;
+    }
+
+    .timeline-title {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .timeline-line {
+      position: absolute;
+      width: 0.5rem;
+      background-color: var(--color-primary);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 25px;
+    }
+
+    .timeline-item {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .timeline-item.left .timeline-item-content {
+      flex-direction: row;
+    }
+
+    .timeline-item.right .timeline-item-content {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-item-content {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      max-width: 100%;
+      padding: 0;
+    }
+
+    .card-container {
+      width: 45%;
+    }
+
+    .connector {
+      display: flex;
+      width: 5%;
+      height: 0.3rem;
+      background-color: var(--color-primary);
+      z-index: 10;
+    }
+
+
+    @media (max-width: 768px) {
+      .timeline-line {
+        left: 0;
+        transform: none;
+        width: 0.2rem;
+      }
+
+      .timeline {
+        align-items: start;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .card-container {
+        width: 95%;
+      }
+
+      .timeline-item-content {
+        width: 100%;
+      }
+
+      .timeline-item.left .timeline-item-content {
+      flex-direction: row-reverse;
+      }
+
+      .timeline-item.right .timeline-item-content {
+      flex-direction: row-reverse;
+      }
+
+    }
+  </style>
+</Layout>

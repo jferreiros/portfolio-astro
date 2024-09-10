@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import education from '../data/education.json';
+---
+
+<Layout title="Joaquin Ferreiros - My Education">
+  <section class="education-container">
+    <h1 class="education-title">My Education</h1>
+    <div class="education-list">
+      {education.map((edu, index) => (
+        <div class="education-card" key={index}>
+          <div class="education-content">
+            <h2>{edu.title}</h2>
+            <p><strong>Institution:</strong> {edu.institution}</p>
+            {edu.duration && (
+              <p><strong>Duration:</strong> {edu.duration.start} - {edu.duration.end || 'Present'}</p>
+            )}
+            {edu.date && <p><strong>Date:</strong> {edu.date}</p>}
+            {edu.technologies && (
+              <p><strong>Technologies:</strong> {edu.technologies.join(', ')}</p>
+            )}
+            <p>{edu.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .education-container {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .education-title {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    .education-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .education-card {
+      background-color: none;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .education-card:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .education-content h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .education-content p {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+  </style>
+</Layout>

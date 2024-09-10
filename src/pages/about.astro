@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Joaquin Ferreiros - About me">
+  <section class="about-me max-w-5xl">
+    <h1>Who Am I? Let's Dive In!</h1>
+
+    <div class="section">
+      <div class="column">
+        <p>I’m a full-stack web developer with a passion for startups and building things from scratch. My journey into development started when I was young, experimenting with my own projects. As I learned more about creating websites, I began helping friends and acquaintances with their own sites, which eventually led me to pursue web development full-time. Now, with years of experience, I’ve built a wide range of web applications and continue to push my limits in the world of technology.</p>
+      </div>
+      <div class="column">
+        <img src="/images/me01.jpeg" alt="About Me Image 1">
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="column">
+        <img src="/images/me02.jpeg" alt="About Me Image 2">
+      </div>
+      <div class="column">
+        <p>While coding is a big part of my life, I’m also an avid sports enthusiast. Like many Argentinians, football has been a staple of my life, and I also practice CrossFit regularly. I’m always up for new challenges and adventures — I even played rugby for several years, a sport that taught me the importance of teamwork. Beyond sports, I’m constantly seeking new experiences and enjoy staying active in both body and mind.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="column">
+        <p>In 2021, I made the move to Barcelona, a vibrant city that has inspired me to keep pursuing my passion for startups. I always have a side project in the works or a fresh idea in mind, whether it’s a web app or a new entrepreneurial venture. My hobbies blend perfectly—startups and sports both fuel my drive to organize, plan, and execute. I believe that with the right planning and dedication, anything can be achieved.
+        </p>
+      </div>
+      <div class="column">
+        <img src="/images/me03.jpeg" alt="About Me Image 3">
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <p>Ready to work together?</p>
+      <span>I’m always excited to take on new projects, collaborate with like-minded people, and make things happen. If you’re ready to work together or just want to chat about an idea, don’t hesitate to reach out!</span>
+      <button onclick="location.href='/contact'" class="primary">Let's Collaborate</button>
+    </div>
+  </section>
+
+  <style>
+    .about-me {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .about-me h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 40px;
+      gap: 0.5rem;
+    }
+
+    .section .column {
+      flex: 1;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .column p {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+
+    .section img {
+      max-width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      max-height: 30rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 0 auto 4rem;
+      width: 60%;
+    }
+
+    .cta-section p {
+      font-size: 1.8em;
+      margin-bottom: 0;
+    }
+
+    .cta-section button {
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column; /* Stack columns vertically on mobile */
+      }
+      .cta-section {
+        width: 100%;
+      }
+    }
+  </style>
+</Layout>

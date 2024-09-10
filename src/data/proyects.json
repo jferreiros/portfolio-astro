@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Project 1",
+    "shortDescription": "Web app para gestión de inventarios.",
+    "description": "A comprehensive web application designed to manage inventory for small businesses. Built with Angular for the front-end and Node.js for the back-end, ensuring real-time updates and secure user authentication.",
+    "image": "/path/to/project1.jpg",
+    "date": "May, 2024",
+    "technologies": ["Angular", "Node.js", "MongoDB"],
+    "projectLink": "https://example.com/project1-demo"
+  },
+  {
+    "title": "Project 2",
+    "shortDescription": "Aplicación de chat en tiempo real.",
+    "description": "A real-time chat application with features such as group chats, media sharing, and notifications. It uses Angular for the UI and Socket.io with Node.js for efficient communication.",
+    "image": "/path/to/project2.jpg",
+    "date": "2023-02-01",
+    "technologies": ["Angular", "Node.js", "Socket.io"]
+  },
+  {
+    "title": "Work 1",
+    "shortDescription": "Plataforma de e-commerce.",
+    "description": "An e-commerce platform allowing users to browse, purchase, and review products. The front-end is built with Angular, while the back-end uses Express and MongoDB to handle user data and transactions.",
+    "image": "/path/to/work1.jpg",
+    "date": "2023-03-01",
+    "technologies": ["Angular", "Express", "MongoDB"],
+    "projectLink": "https://example.com/project1-demo"
+  },
+  {
+    "title": "Project 3",
+    "shortDescription": "Herramienta de gestión de tareas.",
+    "description": "A task management tool aimed at helping teams collaborate and track progress on projects. Implemented with Angular for the front-end and Node.js with a RESTful API for the back-end.",
+    "image": "/path/to/project3.jpg",
+    "date": "2023-06-15",
+    "technologies": ["Angular", "Node.js", "MySQL"]
+  },
+  {
+    "title": "Project 4",
+    "shortDescription": "App de pronóstico del tiempo.",
+    "description": "A weather forecasting application that provides users with real-time weather data for multiple cities. It uses Angular to render the data and Node.js to fetch data from external APIs.",
+    "image": "/path/to/project4.jpg",
+    "date": "2022-09-05",
+    "technologies": ["Angular", "Node.js", "External API"]
+  },
+  {
+    "title": "Work 2",
+    "shortDescription": "Plataforma de blogs.",
+    "description": "A blogging platform that allows users to post, edit, and delete blog posts. Built with Angular for a dynamic user interface and Node.js with MongoDB for data persistence.",
+    "image": "/path/to/work2.jpg",
+    "date": "2023-11-20",
+    "technologies": ["Angular", "Node.js", "MongoDB"]
+  }
+]

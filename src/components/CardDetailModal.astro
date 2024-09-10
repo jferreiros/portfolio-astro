@@ -1,0 +1,101 @@
+---
+// Modal.astro
+export interface ModalProps {
+  title: string;
+  description: string;
+  shortDescription: string;
+  image: string;
+  date: string;
+  technologies: string[];
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const { title, description, shortDescription, image, date, technologies, isOpen, onClose } = Astro.props;
+---
+
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-title {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  .modal-body {
+    margin-top: 1.5rem;
+  }
+
+  .modal-technologies {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .technology {
+    background-color: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+  }
+
+  .modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<div class={`modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
+  <div class="modal-content" onClick={e => e.stopPropagation()}>
+    <div class="modal-header">
+      <h2 class="modal-title">{title}</h2>
+      <button class="modal-close" onClick={onClose}>×</button>
+    </div>
+    <div class="modal-body">
+      <img src={image} alt={title} style="width: 100%; height: auto;" />
+      <p>{shortDescription}</p>
+      <p>{description}</p>
+      <div class="modal-technologies">
+        {technologies.map(tech => (
+          <span class="technology">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

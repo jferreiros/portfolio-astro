@@ -1,0 +1,37 @@
+[
+    {
+    "title": "Full Stack Development – Coding Bootcamp (260 hrs)",
+    "institution": "Tu Carrera Digital | Adecco",
+    "duration": {
+        "start": "July 2021",
+        "end": "September 2021"
+    },
+    "technologies": ["Javascript", "Angular", "TypeScript", "NodeJs", "Express", "MongoDB", "Java", "Spring Boot", "Hibernate", "SQL", "MySQL", "MariaDB"],
+    "description": "Completed a full-stack web development bootcamp with an emphasis on modern web technologies."
+    },
+    {
+    "title": "Full-Stack Web Development with React",
+    "institution": "Coursera",
+    "duration": {
+        "start": "January 2021",
+        "end": "July 2021"
+    },
+    "technologies": ["Javascript", "Angular", "TypeScript", "NodeJs", "Express", "MongoDB", "Java", "Spring Boot", "Hibernate", "SQL", "MySQL", "MariaDB"],
+    "description": "Focused on React for building modern web applications."
+    },
+    {
+    "title": "First Certificate in English – B2",
+    "institution": "Cambridge University",
+    "date": "December 2014",
+    "description": "Achieved a B2 level certification in English from Cambridge University."
+    },
+    {
+    "title": "Bachiller en Ciencias Sociales",
+    "institution": "Instituto Verbo Divino - Argentine",
+    "duration": {
+        "start": "2008",
+        "end": "2014"
+    },
+    "description": "High school diploma in Social Sciences."
+    }
+]

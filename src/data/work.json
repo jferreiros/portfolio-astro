@@ -1,0 +1,77 @@
+[
+      {
+        "title": "Full Stack Developer",
+        "company": "Meetoptics",
+        "duration": {
+          "start": "March 2024",
+          "end": "Ongoing",
+          "months": "2"
+        },
+        "description": "Developed primarily on the Frontend using Vue.js for a startup’s optical products marketplace tailored to scientists.",
+        "keyContributions": [
+          "Redesigned Product Filters: Overhauled the product filtering system, adding advanced options like range selectors and checklists to improve user experience.",
+          "Quote Request Functionality: Implemented a new feature for customers to request production cost quotes, using AWS Lambda, API Gateway, CloudWatch, and Node.js.",
+          "Category View Implementation: Developed new category views, transforming Figma designs into functional frontend pages that enhanced user navigation.",
+          "Blog Structure Revamp: Restructured the blog’s menu and article layout, improving content accessibility and overall user experience."
+        ]
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Emailing Network",
+        "duration": {
+          "start": "October 2021",
+          "end": "March 2024",
+          "years": "2",
+          "months": "5"
+        },
+        "description": "Client-side development with React v17.0, Redux, Hooks, Typescript, Jest, and Tailwind CSS. Angular v13.0 with Material UI and Karma. Development in REST APIs with Node.js, Express, Swagger UI. MVC/DDD with PHP using Symfony and Yii2 frameworks.",
+        "keyContributions": [
+          "Deployment and management of Docker containers, large-scale orchestration with Kubernetes.",
+          "CI/CD with Bitbucket Pipelines.",
+          "Managing, querying, and optimizing databases using MySQL and Postgres/Redshift.",
+          "Implemented scheduled workflows using Python/Airflow.",
+          "Cloud services management in an AWS environment, including SQS queues and S3.",
+          "Experience in project coordination and the hiring process."
+        ]
+      },
+      {
+        "title": "Web Designer",
+        "company": "Freelance – Dixson Marketing",
+        "duration": {
+          "start": "October 2018",
+          "end": "June 2021"
+        }
+      },
+      {
+        "title": "Real Estate Assets Manager",
+        "company": "Emais Servicios Integrales",
+        "duration": {
+          "start": "February 2021",
+          "end": "June 2021"
+        }
+      },
+      {
+        "title": "Administrative Manager",
+        "company": "Centro ERI",
+        "duration": {
+          "start": "February 2019",
+          "end": "August 2020"
+        }
+      },
+      {
+        "title": "Agente Inmobiliario",
+        "company": "Chenlo Propiedades",
+        "duration": {
+          "start": "February 2019",
+          "end": "December 2019"
+        }
+      },
+      {
+        "title": "Administrative",
+        "company": "Centro ERI",
+        "duration": {
+          "start": "March 2017",
+          "end": "March 2018"
+        }
+      }
+    ]

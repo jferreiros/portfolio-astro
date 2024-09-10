@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import workExperience from '../data/work.json';
+---
+
+<Layout title="Joaquin Ferreiros - My Work Experience">
+  <section class="work-experience-container">
+    <h1 class="work-experience-title">My Work Experience</h1>
+    <div class="work-experience-list">
+      {workExperience.map((job, index) => (
+        <div class="work-experience-card" key={index}>
+          <div class="work-experience-content">
+            <h2>{job.title} - {job.company}</h2>
+            <p><strong>Duration:</strong> {job.duration.start} - {job.duration.end || 'Present'} {job.duration.years && `(${job.duration.years} years)`} {job.duration.months && `(${job.duration.months} months)`}</p>
+            <p>{job.description}</p>
+            {job.keyContributions && (
+              <ul>
+                {job.keyContributions.map((contribution, idx) => (
+                  <li key={idx}>{contribution}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .work-experience-container {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .work-experience-title {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    .work-experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .work-experience-card {
+      background-color: none;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .work-experience-card:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .work-experience-content h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .work-experience-content p {
+      margin-bottom: 10px;
+    }
+
+    .work-experience-content ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .work-experience-content li {
+      margin-bottom: 5px;
+      text-align: left;
+    }
+  </style>
+</Layout>
