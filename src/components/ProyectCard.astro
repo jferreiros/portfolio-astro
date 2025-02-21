@@ -1,16 +1,16 @@
 ---
 // Este es el archivo Card.astro
 export interface Props {
-  title: string;
-  description: string;
-  shortDescription: string;
-  image: string;
+  titulo: string;
+  en_long_descr: string;
+  en_short_descr: string;
+  image_path: string;
   date: string;
-  technologies: string[];
+  tags: string[];
   projectLink: string; // Added projectLink property
 }
 
-const { title, description, shortDescription, image, date, technologies, projectLink } = Astro.props;
+const { titulo, en_long_descr, en_short_descr, image_path, date, tags, projectLink } = Astro.props;
 
 const colorClasses = [
   "bg-red-200 text-red-800",
@@ -100,16 +100,16 @@ const getRandomColorClass = () => colorClasses[Math.floor(Math.random() * colorC
 
 <div class="card">
   <div class="card-date">{date}</div>
-  <img src={image} alt={title} />
+  <img src={image_path} alt={titulo} />
   <div class="card-content">
-    <div class="card-title">{title}</div>
-    <div class="card-short-description">{shortDescription}</div>
+    <div class="card-title">{titulo}</div>
+    <div class="card-short-description">{en_short_descr}</div>
     <div class="technologies">
-      {technologies.map((technology) => (
+      {tags.map((technology) => (
         <div class={`technology ${getRandomColorClass()}`}>{technology}</div>
       ))}
     </div>
-    <div class="card-description">{description}</div>
+    <div class="card-description">{en_long_descr}</div>
     {projectLink && (
       <a href={projectLink} target="_blank" rel="noopener noreferrer" class="project-link">
         Link: {projectLink}
