@@ -24,6 +24,11 @@ const colorClasses = [
 
 const getRandomColorClass = () => colorClasses[Math.floor(Math.random() * colorClasses.length)];
 
+const formatDate = (dateString: string): string => {
+  const options: Intl.DateTimeFormatOptions = { year: '2-digit', month: 'short' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', options);
+};
 ---
 
 <style>
@@ -67,7 +72,7 @@ const getRandomColorClass = () => colorClasses[Math.floor(Math.random() * colorC
     font-weight: 700;
     color: #fff;
     text-align: right;
-    width: 100%;
+    flex-shrink: 0;
   }
 
   .technologies {
@@ -99,10 +104,12 @@ const getRandomColorClass = () => colorClasses[Math.floor(Math.random() * colorC
 </style>
 
 <div class="card">
-  <div class="card-date">{date}</div>
   <img src={image_path} alt={titulo} />
   <div class="card-content">
-    <div class="card-title">{titulo}</div>
+    <div class="flex justify-between pt-4 gap-4">
+      <div class="card-title">{titulo}</div>
+      <div class="card-date">{formatDate(date)}</div>
+    </div>
     <div class="card-short-description">{en_short_descr}</div>
     <div class="technologies">
       {tags.map((technology) => (
