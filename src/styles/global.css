@@ -1,64 +1,205 @@
+@property --bg       { syntax: '<color>'; inherits: true; initial-value: #13151a; }
+@property --fg       { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --muted    { syntax: '<color>'; inherits: true; initial-value: #a1a1aa; }
+@property --accent   { syntax: '<color>'; inherits: true; initial-value: #FFDE59; }
+@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #413000; }
+
 :root {
-    --color-primary: #FFDE59;
-    --color-secondary: #413000;
-    --background-color: #13151a;;
-    --text-color: #FFF;
+  --bg: #13151a;
+  --fg: #ffffff;
+  --muted: #a1a1aa;
+  --accent: #FFDE59;
+  --accent-2: #413000;
+  --font-display: 'Onest Variable', system-ui, sans-serif;
+  --font-body: 'Onest Variable', system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Courier New', monospace;
+  --radius: 0.625rem;
+  --shadow-mid: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --easing: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration: 700ms;
+  --bg-pattern: none;
+  --bg-overlay: transparent;
+}
+
+html[data-era="2024-2026"] {
+  --bg: #FAFAF7;
+  --fg: #0A0A0A;
+  --muted: #6B6B66;
+  --accent: #FF5C28;
+  --accent-2: #C8B6FF;
+  --font-display: 'Instrument Serif', 'Fraunces Variable', Georgia, serif;
+  --font-body: 'Geist Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --radius: 10px;
+  --shadow-mid: 0 4px 12px rgba(10,10,10,0.06), 0 12px 32px rgba(10,10,10,0.08);
+  --bg-overlay:
+    radial-gradient(at 18% 22%, rgba(200, 182, 255, 0.45) 0%, transparent 50%),
+    radial-gradient(at 82% 12%, rgba(255, 92, 40, 0.18) 0%, transparent 55%),
+    radial-gradient(at 70% 82%, rgba(160, 231, 229, 0.35) 0%, transparent 55%);
+}
+
+html[data-era="2021-2024"] {
+  --bg: #13151A;
+  --fg: #FFFFFF;
+  --muted: #A1A1AA;
+  --accent: #FFDE59;
+  --accent-2: #413000;
+  --font-display: 'Onest Variable', system-ui, sans-serif;
+  --font-body: 'Onest Variable', system-ui, sans-serif;
+  --font-mono: Menlo, Monaco, 'Lucida Console', monospace;
+  --radius: 5px;
+  --shadow-mid: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --bg-overlay: transparent;
+}
+
+html[data-era="2018-2021"] {
+  --bg: #F4F0FF;
+  --fg: #1F1B3A;
+  --muted: #7C7A99;
+  --accent: #FF8FA3;
+  --accent-2: #A0E7E5;
+  --font-display: 'Inter Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --radius: 20px;
+  --shadow-mid: 8px 8px 24px rgba(31, 27, 58, 0.10), -8px -8px 24px rgba(255, 255, 255, 0.85);
+  --bg-overlay:
+    radial-gradient(at 20% 20%, #FFD6E0 0%, transparent 50%),
+    radial-gradient(at 80% 10%, #C8B6FF 0%, transparent 50%),
+    radial-gradient(at 70% 80%, #A0E7E5 0%, transparent 50%);
+}
+
+html[data-era="2017"] {
+  --bg: #FAFAFA;
+  --fg: #212121;
+  --muted: #757575;
+  --accent: #3F51B5;
+  --accent-2: #009688;
+  --font-display: 'Roboto', 'Helvetica Neue', sans-serif;
+  --font-body: 'Roboto', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  --radius: 4px;
+  --shadow-mid: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --bg-overlay: transparent;
+}
+
+html[data-era="2014"] {
+  --bg: #ECF0F1;
+  --fg: #2C3E50;
+  --muted: #95A5A6;
+  --accent: #3498DB;
+  --accent-2: #E74C3C;
+  --font-display: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Source Code Pro', monospace;
+  --radius: 2px;
+  --shadow-mid: 0 1px 0 rgba(0, 0, 0, 0.05);
+  --bg-overlay: transparent;
+}
+
+html[data-era="2008-2013"] {
+  --bg: #E0E0E0;
+  --fg: #000080;
+  --muted: #555555;
+  --accent: #1A4FCC;
+  --accent-2: #CC0000;
+  --font-display: 'Trebuchet MS', 'Comic Sans MS', sans-serif;
+  --font-body: 'Verdana', Geneva, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --radius: 6px;
+  --shadow-mid: 3px 3px 0 #000;
+  --bg-overlay:
+    repeating-linear-gradient(0deg, rgba(0, 0, 128, 0.04) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 128, 0.04) 0 1px, transparent 1px 24px);
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--fg);
+  transition:
+    --bg 800ms var(--easing),
+    --fg 800ms var(--easing),
+    --muted 800ms var(--easing),
+    --accent 1000ms var(--easing),
+    --accent-2 1000ms var(--easing),
+    background-color 800ms var(--easing),
+    color 800ms var(--easing);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-body);
+  position: relative;
+  min-height: 100svh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: var(--bg-overlay);
+  opacity: 1;
+  z-index: -1;
+  transition: opacity 800ms var(--easing);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0.5em 0;
+  font-family: var(--font-display);
+}
+
+p {
+  line-height: 1.6;
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button, .button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+button.primary, .button.primary {
+  background-color: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+button.primary:hover, .button.primary:hover {
+  background-color: var(--accent-2);
+  color: var(--fg);
+}
+
+button.secondary, .button.secondary {
+  background-color: transparent;
+  color: var(--fg);
+  border: 1px solid currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, body, body::before, .era-section, .era-section * {
+    transition-duration: 0ms !important;
   }
-  
-  /* Estilos globales */
-  html {
-    font-family: "Onest Variable", sans-serif;
-    background: #13151a;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    color: var(--text-color);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0.5em 0;
-  }
-  
-  p {
-    line-height: 1.6;
-    margin: 0 0 1em;
-  }
-  
-  /* Estilos de botones */
-  button, .button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    text-align: center;
-    text-decoration: none;
-  }
-  
-  /* Botón primario */
-  button.primary, .button.primary {
-    background-color: var(--color-primary);
-    color: var(--background-color);
-    transition: background-color 0.3s ease;
-    font-weight: 700;
-  }
-  
-  button.primary:hover, .button.primary:hover {
-    background-color: var(--color-secondary);
-    color: #fff;
-  }
-  
-  /* Botón secundario */
-  button.secondary, .button.secondary {
-    background-color: var(--color-secondary);
-    color: var(--text-color);
-    transition: background-color 0.3s ease;
-  }
-  
-  button.secondary:hover, .button.secondary:hover {
-    background-color: lighten(var(--color-secondary), 10%);
-  }
-  
+}
