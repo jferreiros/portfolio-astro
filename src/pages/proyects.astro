@@ -8,20 +8,21 @@ import dotenv from 'dotenv';
   // Load environment variables
   dotenv.config();
 
-// Initialize Supabase client using environment variables
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
-
-// Fetch projects from Supabase
-const { data: projects, error } = await supabase
-  .from('p_portfolio')
-  .select('*')
-  .order('date', { ascending: false });
-
-if (error) {
-  console.error('Error fetching projects:', error);
+let projects: any[] = [];
+if (supabaseUrl && supabaseKey) {
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  const { data, error } = await supabase
+    .from('p_portfolio')
+    .select('*')
+    .order('date', { ascending: false });
+  if (error) {
+    console.error('Error fetching projects:', error);
+  } else {
+    projects = data ?? [];
+  }
 }
 
 ---
