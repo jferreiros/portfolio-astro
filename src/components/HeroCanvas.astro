@@ -1,0 +1,209 @@
+---
+---
+
+<canvas class="hero-canvas" aria-hidden="true"></canvas>
+
+<script>
+  import { Renderer, Program, Mesh, Triangle } from 'ogl';
+
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.hero-canvas');
+  if (!canvas) {
+    throw new Error('HeroCanvas: canvas element not found');
+  }
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reducedMotion) {
+    canvas.classList.add('is-static');
+  } else {
+    const vertex = /* glsl */ `
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = position * 0.5 + 0.5;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const fragment = /* glsl */ `
+      precision highp float;
+      varying vec2 vUv;
+      uniform float uTime;
+      uniform vec2 uResolution;
+
+      vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+
+      float snoise(vec2 v) {
+        const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                           -0.577350269189626, 0.024390243902439);
+        vec2 i  = floor(v + dot(v, C.yy));
+        vec2 x0 = v -   i + dot(i, C.xx);
+        vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+        vec4 x12 = x0.xyxy + C.xxzz;
+        x12.xy -= i1;
+        i = mod(i, 289.0);
+        vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0))
+                       + i.x + vec3(0.0, i1.x, 1.0));
+        vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy),
+                                dot(x12.zw, x12.zw)), 0.0);
+        m = m * m; m = m * m;
+        vec3 x = 2.0 * fract(p * C.www) - 1.0;
+        vec3 h = abs(x) - 0.5;
+        vec3 ox = floor(x + 0.5);
+        vec3 a0 = x - ox;
+        m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
+        vec3 g;
+        g.x  = a0.x  * x0.x  + h.x  * x0.y;
+        g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+        return 130.0 * dot(m, g);
+      }
+
+      float fbm(vec2 p) {
+        float v = 0.0;
+        float a = 0.5;
+        for (int i = 0; i < 3; i++) {
+          v += a * snoise(p);
+          p *= 2.0;
+          a *= 0.5;
+        }
+        return v;
+      }
+
+      void main() {
+        vec2 uv = vUv;
+        float aspect = uResolution.x / uResolution.y;
+        vec2 p = vec2(uv.x * aspect, uv.y);
+
+        float t = uTime * 0.08;
+
+        float n1 = fbm(p * 1.4 + vec2(t, t * 0.6));
+        float n2 = fbm(p * 2.1 + vec2(-t * 0.7, t * 0.4) + 5.2);
+        float n = (n1 * 0.65 + n2 * 0.35) * 0.5 + 0.5;
+
+        vec3 sky    = vec3(0.353, 0.784, 0.980);
+        vec3 orange = vec3(1.000, 0.361, 0.157);
+        vec3 purple = vec3(0.482, 0.169, 1.000);
+        vec3 mint   = vec3(0.000, 0.831, 0.667);
+
+        vec3 col = sky;
+        col = mix(col, mint,   smoothstep(0.30, 0.55, n));
+        col = mix(col, purple, smoothstep(0.50, 0.75, n));
+        col = mix(col, orange, smoothstep(0.70, 0.92, n));
+
+        float bandShift = fbm(p * 0.8 + vec2(t * 0.5, -t * 0.3));
+        col = mix(col, col * vec3(1.05, 0.98, 1.02), bandShift * 0.4);
+
+        vec2 q = uv - 0.5;
+        float vignette = smoothstep(0.85, 0.35, dot(q, q) * 1.6);
+        col *= mix(0.9, 1.0, vignette);
+
+        float alpha = 0.55;
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    const renderer = new Renderer({
+      canvas,
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
+      alpha: true,
+      antialias: false,
+    });
+    const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
+
+    const geometry = new Triangle(gl);
+    const program = new Program(gl, {
+      vertex,
+      fragment,
+      uniforms: {
+        uTime: { value: 0 },
+        uResolution: { value: [1, 1] },
+      },
+      transparent: true,
+    });
+    const mesh = new Mesh(gl, { geometry, program });
+
+    const setSize = () => {
+      const parent = canvas.parentElement;
+      const w = parent ? parent.clientWidth : window.innerWidth;
+      const h = parent ? parent.clientHeight : window.innerHeight;
+      renderer.setSize(w, h);
+      program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
+    };
+    setSize();
+
+    let resizeTimer: number | undefined;
+    const onResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(setSize, 200);
+    };
+    window.addEventListener('resize', onResize);
+
+    let rafId = 0;
+    let running = true;
+    let startTime = performance.now();
+    let pausedAt = 0;
+
+    const loop = (now: number) => {
+      if (!running) return;
+      program.uniforms.uTime.value = (now - startTime) / 1000;
+      renderer.render({ scene: mesh });
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      startTime += performance.now() - pausedAt;
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      pausedAt = performance.now();
+      cancelAnimationFrame(rafId);
+    };
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    rafId = requestAnimationFrame(loop);
+  }
+</script>
+
+<style>
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block;
+    pointer-events: none;
+  }
+
+  .hero-canvas.is-static {
+    opacity: 0.7;
+    background:
+      linear-gradient(135deg,
+        rgba(91, 200, 250, 0.22) 0%,
+        rgba(0, 212, 170, 0.18) 30%,
+        rgba(123, 43, 255, 0.18) 65%,
+        rgba(255, 92, 40, 0.20) 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-canvas {
+      opacity: 0.7;
+      background:
+        linear-gradient(135deg,
+          rgba(91, 200, 250, 0.22) 0%,
+          rgba(0, 212, 170, 0.18) 30%,
+          rgba(123, 43, 255, 0.18) 65%,
+          rgba(255, 92, 40, 0.20) 100%);
+    }
+  }
+</style>

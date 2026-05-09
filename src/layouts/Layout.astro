@@ -14,6 +14,7 @@ const routeName = Astro.url.pathname;
 
 import Nav from "../components/Nav.astro";
 import Header from "../components/Header.astro";
+import SoundToggle from "../components/SoundToggle.astro";
 import '../styles/global.css';
 ---
 
@@ -42,5 +43,11 @@ import '../styles/global.css';
         </footer>
       </div>
     )}
+    <SoundToggle />
+    <script>
+      import { initLenis } from "../scripts/lenis-init";
+      import "../lib/use-sfx-bind";
+      initLenis();
+    </script>
   </body>
 </html>

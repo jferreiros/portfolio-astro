@@ -1,0 +1,109 @@
+---
+---
+<button
+  id="sfx-toggle"
+  type="button"
+  class="sfx-toggle"
+  aria-label="Activar sonido"
+  aria-pressed="false"
+  data-state="off"
+>
+  <svg class="icon icon-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+  </svg>
+  <svg class="icon icon-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+    <line x1="22" y1="9" x2="16" y2="15"></line>
+    <line x1="16" y1="9" x2="22" y2="15"></line>
+  </svg>
+</button>
+
+<style>
+  .sfx-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    color: #1d1d1f;
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 200ms cubic-bezier(0.32, 0.72, 0, 1),
+      background 200ms cubic-bezier(0.32, 0.72, 0, 1),
+      border-color 200ms cubic-bezier(0.32, 0.72, 0, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sfx-toggle:hover {
+    transform: scale(1.05);
+  }
+
+  .sfx-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .sfx-toggle:focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 3px;
+  }
+
+  .sfx-toggle .icon {
+    display: none;
+  }
+
+  .sfx-toggle[data-state="on"] .icon-on {
+    display: block;
+  }
+
+  .sfx-toggle[data-state="off"] .icon-off {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .sfx-toggle {
+      background: rgba(29, 29, 31, 0.85);
+      color: #f5f5f7;
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+  }
+</style>
+
+<script>
+  import { sfx } from "../lib/sfx";
+
+  const btn = document.getElementById("sfx-toggle");
+  if (btn) {
+    const refresh = () => {
+      const on = sfx.enabled;
+      btn.setAttribute("data-state", on ? "on" : "off");
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", on ? "Desactivar sonido" : "Activar sonido");
+    };
+
+    refresh();
+
+    btn.addEventListener("click", () => {
+      sfx.toggle();
+      if (sfx.enabled) {
+        sfx.startAmbient();
+        sfx.pop();
+      } else {
+        sfx.stopAmbient();
+      }
+    });
+
+    window.addEventListener("sfx:toggle", refresh);
+  }
+</script>

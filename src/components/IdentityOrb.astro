@@ -1,0 +1,273 @@
+---
+interface Props {
+	size?: number;
+}
+
+const { size = 48 } = Astro.props;
+---
+
+<button
+	type="button"
+	class="identity-orb"
+	aria-label="Volver al inicio"
+	data-tint="rainbow"
+	style={`--orb-size:${size}px`}
+>
+	<span class="orb-core" aria-hidden="true"></span>
+	<span class="orb-glow" aria-hidden="true"></span>
+</button>
+
+<style>
+	@property --orb-angle {
+		syntax: "<angle>";
+		inherits: false;
+		initial-value: 0deg;
+	}
+
+	.identity-orb {
+		position: fixed;
+		top: 1.25rem;
+		left: 1.25rem;
+		z-index: 60;
+		width: var(--orb-size, 48px);
+		height: var(--orb-size, 48px);
+		padding: 0;
+		border: none;
+		border-radius: 50%;
+		background: transparent;
+		cursor: pointer;
+		isolation: isolate;
+		transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.identity-orb:focus-visible {
+		outline: 2px solid rgba(0, 0, 0, 0.35);
+		outline-offset: 4px;
+	}
+
+	.orb-core,
+	.orb-glow {
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		display: block;
+		pointer-events: none;
+	}
+
+	.orb-core {
+		background:
+			radial-gradient(
+				circle at 30% 30%,
+				rgba(255, 255, 255, 0.55),
+				rgba(255, 255, 255, 0) 55%
+			),
+			conic-gradient(
+				from var(--orb-angle),
+				#ff5c28,
+				#7b2bff,
+				#0066ff,
+				#5ac8fa,
+				#00d4aa,
+				#ff5c28
+			);
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+			inset 0 -2px 6px rgba(0, 0, 0, 0.18),
+			0 0 0 1px rgba(0, 0, 0, 0.06);
+		animation: orb-spin 30s linear infinite;
+		transition:
+			background 0.8s ease,
+			box-shadow 0.6s ease,
+			filter 0.4s ease;
+	}
+
+	.orb-glow {
+		z-index: -1;
+		filter: blur(14px);
+		opacity: 0.55;
+		background: radial-gradient(
+			circle,
+			var(--orb-glow-color, rgba(255, 92, 40, 0.6)),
+			transparent 70%
+		);
+		transform: scale(1.05);
+		transition:
+			background 0.8s ease,
+			opacity 0.4s ease,
+			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.identity-orb:hover {
+		transform: scale(1.15) rotate(6deg);
+	}
+
+	.identity-orb:hover .orb-glow {
+		opacity: 0.85;
+		transform: scale(1.35);
+	}
+
+	.identity-orb:hover .orb-core {
+		filter: brightness(1.08) saturate(1.1);
+	}
+
+	.identity-orb:active {
+		transform: scale(0.9);
+		transition-duration: 0.12s;
+	}
+
+	.identity-orb[data-tint="orange"] .orb-core {
+		background:
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+			conic-gradient(from var(--orb-angle), #ff5c28, #ff8a4a, #ffb27a, #ff5c28);
+	}
+	.identity-orb[data-tint="mint"] .orb-core {
+		background:
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+			conic-gradient(from var(--orb-angle), #00d4aa, #5cf2c8, #b8fce6, #00d4aa);
+	}
+	.identity-orb[data-tint="purple"] .orb-core {
+		background:
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+			conic-gradient(from var(--orb-angle), #7b2bff, #a87aff, #d6c2ff, #7b2bff);
+	}
+	.identity-orb[data-tint="blue"] .orb-core {
+		background:
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+			conic-gradient(from var(--orb-angle), #0066ff, #4a92ff, #a8c6ff, #0066ff);
+	}
+	.identity-orb[data-tint="sky"] .orb-core {
+		background:
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+			conic-gradient(from var(--orb-angle), #5ac8fa, #8fdcff, #cfeeff, #5ac8fa);
+	}
+
+	.identity-orb[data-tint="orange"] {
+		--orb-glow-color: rgba(255, 92, 40, 0.6);
+	}
+	.identity-orb[data-tint="mint"] {
+		--orb-glow-color: rgba(0, 212, 170, 0.55);
+	}
+	.identity-orb[data-tint="purple"] {
+		--orb-glow-color: rgba(123, 43, 255, 0.55);
+	}
+	.identity-orb[data-tint="blue"] {
+		--orb-glow-color: rgba(0, 102, 255, 0.55);
+	}
+	.identity-orb[data-tint="sky"] {
+		--orb-glow-color: rgba(90, 200, 250, 0.6);
+	}
+	.identity-orb[data-tint="rainbow"] {
+		--orb-glow-color: rgba(123, 43, 255, 0.45);
+	}
+
+	.identity-orb[data-on-dark="true"] .orb-core {
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+			inset 0 -2px 6px rgba(0, 0, 0, 0.25),
+			0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
+
+	@keyframes orb-spin {
+		to {
+			--orb-angle: 360deg;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.orb-core {
+			animation: none;
+		}
+		.identity-orb,
+		.orb-glow,
+		.orb-core {
+			transition: none;
+		}
+		.identity-orb:hover {
+			transform: none;
+		}
+	}
+</style>
+
+<script>
+	type Tint = "rainbow" | "orange" | "mint" | "purple" | "blue" | "sky";
+
+	const DARK_TINTS: ReadonlySet<Tint> = new Set(["purple", "blue"] as Tint[]);
+
+	const initOrb = (): void => {
+		const orb = document.querySelector<HTMLButtonElement>(".identity-orb");
+		if (!orb) return;
+
+		const targets = Array.from(
+			document.querySelectorAll<HTMLElement>("[data-orb-tint]")
+		);
+
+		const setTint = (tint: Tint, onDark: boolean): void => {
+			orb.dataset.tint = tint;
+			orb.dataset.onDark = onDark ? "true" : "false";
+		};
+
+		if (targets.length > 0) {
+			let activeId: Element | null = null;
+			const visibility = new Map<Element, number>();
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						visibility.set(entry.target, entry.intersectionRatio);
+					}
+					let topRatio = 0;
+					let topEl: Element | null = null;
+					for (const [el, ratio] of visibility) {
+						if (ratio > topRatio) {
+							topRatio = ratio;
+							topEl = el;
+						}
+					}
+					if (topEl && topEl !== activeId) {
+						activeId = topEl;
+						const raw = (topEl as HTMLElement).dataset.orbTint ?? "rainbow";
+						const tint = (raw as Tint) || "rainbow";
+						const onDark =
+							DARK_TINTS.has(tint) ||
+							(topEl as HTMLElement).dataset.orbDark === "true";
+						setTint(tint, onDark);
+					}
+				},
+				{
+					threshold: [0, 0.25, 0.5, 0.75, 1],
+					rootMargin: "-20% 0px -20% 0px",
+				}
+			);
+
+			for (const target of targets) observer.observe(target);
+		}
+
+		orb.addEventListener("mouseenter", () => {
+			try {
+				void import("../lib/sfx").then((m) => m?.sfx?.hover?.());
+			} catch {}
+		});
+
+		orb.addEventListener("click", () => {
+			try {
+				void import("../lib/sfx").then((m) => m?.sfx?.click?.());
+			} catch {}
+
+			const w = window as unknown as {
+				lenis?: { scrollTo: (target: number, opts?: unknown) => void };
+			};
+			if (w.lenis?.scrollTo) {
+				w.lenis.scrollTo(0);
+			} else {
+				window.scrollTo({ top: 0, behavior: "smooth" });
+			}
+		});
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initOrb, { once: true });
+	} else {
+		initOrb();
+	}
+</script>

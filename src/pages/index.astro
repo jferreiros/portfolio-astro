@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import IdentityOrb from '../components/IdentityOrb.astro';
+import HeroCanvas from '../components/HeroCanvas.astro';
+import WorkSection from '../components/WorkSection.astro';
 
 const projects = [
   {
@@ -59,6 +62,7 @@ const timeline = [
 ---
 
 <Layout title="Joaquín Ferreiros — Designer-turned-engineer" singlePage={true}>
+  <IdentityOrb />
   <nav class="topnav">
     <a href="#top" class="topnav-logo">Joaquín Ferreiros</a>
     <div class="topnav-links">
@@ -68,7 +72,8 @@ const timeline = [
     </div>
   </nav>
 
-  <section id="top" class="hero">
+  <section id="top" class="hero" data-orb-tint="rainbow">
+    <HeroCanvas />
     <span class="eyebrow reveal">✦ Available for select projects · 2026</span>
     <h1 class="hero-title">
       <span class="reveal">Joaquín</span>
@@ -86,7 +91,7 @@ const timeline = [
     <div class="scroll-hint">Scroll</div>
   </section>
 
-  <section id="about" class="now-section">
+  <section id="about" class="now-section" data-orb-tint="sky">
     <div class="now-inner">
       <span class="section-num reveal">01 / Now</span>
       <h2 class="now-title">
@@ -104,40 +109,10 @@ const timeline = [
     </div>
   </section>
 
-  <section id="work" class="work-header">
-    <span class="section-num reveal">02 / Selected work</span>
-    <h2 class="work-h2 reveal">A few things I've built.</h2>
-  </section>
+  <WorkSection projects={projects} />
 
-  {projects.map((p, i) => (
-    <section
-      class="project"
-      style={`--p-bg: ${p.bg}; --p-fg: ${p.fg}; --p-accent: ${p.accent};`}
-    >
-      <div class="project-inner">
-        <div class="project-meta reveal">
-          <span class="project-num">0{i + 1}</span>
-          <span class="project-year">{p.year}</span>
-          <span class="project-role">{p.role}</span>
-        </div>
-        <h3 class="project-name reveal">{p.name}</h3>
-        <p class="project-tagline reveal">{p.tagline}</p>
-        <p class="project-desc reveal">{p.description}</p>
-        {p.href !== '#' && (
-          <a class="project-link reveal" href={p.href} target="_blank" rel="noopener noreferrer">
-            Visit {p.name} →
-          </a>
-        )}
-        <div class="project-frame reveal" aria-hidden="true">
-          <div class="project-frame-inner">
-            <span class="project-frame-mark">{p.name}</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  ))}
 
-  <section class="experience">
+  <section class="experience" data-orb-tint="mint">
     <div class="experience-inner">
       <span class="section-num reveal">03 / Trail</span>
       <h2 class="experience-h2 reveal">Where I've been.</h2>
@@ -156,7 +131,7 @@ const timeline = [
     </div>
   </section>
 
-  <section class="stack">
+  <section class="stack" data-orb-tint="purple">
     <div class="stack-inner">
       <span class="section-num reveal">04 / Stack</span>
       <h2 class="stack-h2 reveal">Tools I reach for.</h2>
@@ -192,7 +167,7 @@ const timeline = [
     </div>
   </section>
 
-  <section id="contact" class="contact">
+  <section id="contact" class="contact" data-orb-tint="orange" data-orb-dark="true">
     <div class="contact-inner">
       <span class="section-num reveal">05 / Get in touch</span>
       <h2 class="contact-h2">
@@ -292,10 +267,8 @@ const timeline = [
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
-    background:
-      radial-gradient(ellipse 80% 50% at 80% 20%, rgba(91, 200, 250, 0.18), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 10% 80%, rgba(255, 92, 40, 0.12), transparent 65%),
-      radial-gradient(ellipse 60% 40% at 60% 90%, rgba(123, 43, 255, 0.10), transparent 60%);
+    background: var(--bg);
+    overflow: hidden;
   }
 
   .eyebrow {
