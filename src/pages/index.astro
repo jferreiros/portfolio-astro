@@ -11,7 +11,7 @@ const railItems = [
   { id: 'engineer', label: 'AI Product Engineer' },
   { id: 'trail', label: 'Trail' },
   { id: 'stack', label: 'Stack' },
-  { id: 'founder', label: 'Founder' },
+  { id: 'ventures', label: 'Ventures' },
   { id: 'side-quests', label: 'Side quests' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -92,14 +92,14 @@ const socials = [
 ];
 ---
 
-<Layout title="Joaquín Ferreiros — AI Product Engineer & Founder" singlePage={true}>
+<Layout title="Joaquín Ferreiros — AI Product Engineer & Entrepreneur" singlePage={true}>
   <IdentityOrb />
   <ScrollRail items={railItems} />
   <nav class="topnav">
     <a href="#top" class="topnav-logo">Joaquín Ferreiros</a>
     <div class="topnav-links">
       <a href="#engineer">AI Product Engineer</a>
-      <a href="#founder">Founder</a>
+      <a href="#ventures">Ventures</a>
       <a href="#contact">Contact</a>
       <span class="topnav-sep" aria-hidden="true"></span>
       {socials.map((s) => (
@@ -122,7 +122,7 @@ const socials = [
     </p>
     <div class="hero-actions reveal">
       <a href="#engineer" class="button primary">AI Product Engineer →</a>
-      <a href="#founder" class="button secondary">The founder →</a>
+      <a href="#ventures" class="button secondary">My ventures →</a>
     </div>
     <div class="scroll-hint">Scroll</div>
   </section>
@@ -139,7 +139,7 @@ const socials = [
           By trade I'm an <strong>AI Product Engineer</strong>: at <strong>Vivla</strong> I own features end to end — talking to users, designing the UX, shipping to production — and right now I'm building the company's first agentic AI features.
         </p>
         <p>
-          By nature I'm a <strong>founder</strong>: I run <strong>Pampa Boats</strong> with my partner, build products like <strong>Flipr</strong>, and through <strong>Buildylab</strong> I help companies put AI to work in their operations.
+          By nature I'm an <strong>entrepreneur</strong>: I run <strong>Pampa Boats</strong> with my partner, build products like <strong>Flipr</strong>, and through <strong>Buildylab</strong> I help companies put AI to work in their operations.
         </p>
       </div>
     </div>
@@ -218,8 +218,8 @@ const socials = [
 
   <WorkSection
     projects={ventureProjects}
-    id="founder"
-    num="05 / The founder"
+    id="ventures"
+    num="05 / Ventures"
     title="What I'm building."
     showToggle={false}
   />
