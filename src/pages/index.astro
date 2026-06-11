@@ -41,26 +41,25 @@ const ventureProjects = [
     accent: '#FFE066',
     href: 'https://pampaboats.com',
   },
+];
+
+const sideProjects = [
   {
     name: 'Flipr',
-    tagline: 'Spotting deals across borders, in seconds.',
-    description: 'A multi-module deal-hunting platform — used motorcycles on Wallapop, cars from Germany to Spain, last-minute boat rentals, and a few more under the hood. Scrapers, scoring, alerts. Built ~90% with AI agents.',
-    year: '2025 — now',
-    role: 'Solo founder',
-    bg: '#FF5C28',
-    fg: '#FFFFFF',
-    accent: '#FFE7DA',
+    year: '2025',
+    detail: 'Deal-hunting platform — used motorcycles, cars from Germany to Spain, last-minute rentals. Built ~90% with AI agents.',
     href: 'https://flipr.jferreiros.com',
   },
   {
-    name: 'Argenpats',
-    tagline: 'A community for Argentinian businesses abroad.',
-    description: 'Map-driven directory + community for Argentinian-owned businesses outside Argentina. NestJS · Next.js · Mongo · Mapbox · a Chrome extension for submissions.',
+    name: 'Setalu',
     year: '2024',
-    role: 'Co-founder',
-    bg: '#74ACDF',
-    fg: '#0A1628',
-    accent: '#FFFFFF',
+    detail: '3D-printed lamp business. AI content pipelines for product photography and marketing across Instagram and Etsy.',
+    href: '',
+  },
+  {
+    name: 'Argenpats',
+    year: '2024',
+    detail: 'Map-driven directory + community for Argentinian-owned businesses abroad. Next.js · Mapbox · Chrome extension.',
     href: 'https://argenpats.com',
   },
 ];
@@ -86,7 +85,7 @@ const socials = [
   <nav class="topnav">
     <a href="#top" class="topnav-logo">Joaquín Ferreiros</a>
     <div class="topnav-links">
-      <a href="#engineer">Engineer</a>
+      <a href="#engineer">AI Product Engineer</a>
       <a href="#founder">Founder</a>
       <a href="#contact">Contact</a>
       <span class="topnav-sep" aria-hidden="true"></span>
@@ -109,7 +108,7 @@ const socials = [
       ventures — software and beyond.
     </p>
     <div class="hero-actions reveal">
-      <a href="#engineer" class="button primary">The engineer →</a>
+      <a href="#engineer" class="button primary">AI Product Engineer →</a>
       <a href="#founder" class="button secondary">The founder →</a>
     </div>
     <div class="scroll-hint">Scroll</div>
@@ -124,7 +123,7 @@ const socials = [
       </h2>
       <div class="now-body reveal">
         <p>
-          By trade I'm an <strong>engineer</strong>: at <strong>Vivla</strong> I own features end to end — talking to users, designing the UX, shipping to production — and right now I'm building the company's first agentic AI features.
+          By trade I'm an <strong>AI Product Engineer</strong>: at <strong>Vivla</strong> I own features end to end — talking to users, designing the UX, shipping to production — and right now I'm building the company's first agentic AI features.
         </p>
         <p>
           By nature I'm a <strong>founder</strong>: I run <strong>Pampa Boats</strong> with my partner, build products like <strong>Flipr</strong>, and through <strong>Buildylab</strong> I help companies put AI to work in their operations.
@@ -136,7 +135,7 @@ const socials = [
   <WorkSection
     projects={engineerProjects}
     id="engineer"
-    num="02 / The engineer"
+    num="02 / AI Product Engineer"
     title="Where I work."
   />
 
@@ -212,9 +211,31 @@ const socials = [
     showToggle={false}
   />
 
+  <section class="experience side-projects" data-orb-tint="mint">
+    <div class="experience-inner">
+      <span class="section-num reveal">06 / Side quests</span>
+      <h2 class="experience-h2 reveal">Always something on the boil.</h2>
+      <ol class="timeline">
+        {sideProjects.map((p) => (
+          <li class="timeline-item reveal">
+            <span class="timeline-year">{p.year}</span>
+            <div class="timeline-body">
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener" class="timeline-title side-link">{p.name} →</a>
+              ) : (
+                <span class="timeline-title">{p.name}</span>
+              )}
+              <span class="timeline-detail">{p.detail}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
   <section id="contact" class="contact" data-orb-tint="orange" data-orb-dark="true">
     <div class="contact-inner">
-      <span class="section-num reveal">06 / Get in touch</span>
+      <span class="section-num reveal">07 / Get in touch</span>
       <h2 class="contact-h2">
         <span class="reveal">Got a project</span>
         <span class="reveal contact-accent">worth shipping?</span>
@@ -648,6 +669,19 @@ const socials = [
     color: var(--muted);
     margin-top: 0.25rem;
     line-height: 1.5;
+  }
+
+  .side-projects {
+    background: var(--bg);
+  }
+
+  .side-link {
+    width: fit-content;
+  }
+
+  .side-link:hover {
+    color: var(--brand-orange);
+    opacity: 1;
   }
 
   .stack {
