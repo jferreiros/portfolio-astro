@@ -13,9 +13,19 @@ interface Project {
 
 interface Props {
   projects: Project[];
+  id?: string;
+  num?: string;
+  title?: string;
+  showToggle?: boolean;
 }
 
-const { projects } = Astro.props;
+const {
+  projects,
+  id = 'work',
+  num = '02 / Selected work',
+  title = "A few things I've built.",
+  showToggle = true,
+} = Astro.props;
 ---
 
 <script is:inline>
@@ -30,15 +40,15 @@ const { projects } = Astro.props;
   })();
 </script>
 
-<section id="work" class="work-header">
+<section id={id} class="work-header">
   <div class="work-header-inner">
     <div class="work-heading-row">
       <div>
-        <span class="section-num reveal">02 / Selected work</span>
-        <h2 class="work-h2 reveal">A few things I've built.</h2>
+        <span class="section-num reveal">{num}</span>
+        <h2 class="work-h2 reveal">{title}</h2>
       </div>
 
-      <div
+      {showToggle && <div
         class="work-toggle reveal"
         role="radiogroup"
         aria-label="Selected work view mode"
@@ -96,7 +106,7 @@ const { projects } = Astro.props;
           <span>List</span>
         </button>
         <span class="work-toggle-thumb" aria-hidden="true"></span>
-      </div>
+      </div>}
     </div>
   </div>
 </section>

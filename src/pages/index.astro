@@ -4,28 +4,31 @@ import IdentityOrb from '../components/IdentityOrb.astro';
 import HeroCanvas from '../components/HeroCanvas.astro';
 import WorkSection from '../components/WorkSection.astro';
 
-const projects = [
+const engineerProjects = [
   {
     name: 'Vivla',
     tagline: 'Co-ownership of vacation homes, redesigned.',
-    description: 'Building product at Vivla — the platform that lets eight families own one extraordinary home together. Tooling for ownership, scheduling, and the quiet logistics that make it work.',
+    description: 'Rebuilt the consumer mobile app from scratch (React Native + Expo), serving 300+ clients with a WhatsApp-grade support chat. Grew an internal product suite used daily by operations and marketing. Now building Vivla’s first agentic AI features with Mastra, Vercel AI SDK and Langfuse.',
     year: '2025 — now',
-    role: 'Product engineer',
+    role: 'AI Product Engineer',
     bg: '#0A1628',
     fg: '#FFFFFF',
     accent: '#5AC8FA',
     href: 'https://vivla.com',
   },
+];
+
+const ventureProjects = [
   {
-    name: 'Flipr',
-    tagline: 'Spotting deals across borders, in seconds.',
-    description: 'A multi-module deal-hunting platform — used motorcycles on Wallapop, cars from Germany to Spain, last-minute boat rentals, and a few more under the hood. Scrapers, scoring, alerts.',
-    year: '2025',
-    role: 'Solo founder',
-    bg: '#FF5C28',
-    fg: '#FFFFFF',
-    accent: '#FFE7DA',
-    href: '#',
+    name: 'Buildylab',
+    tagline: 'AI working inside real businesses.',
+    description: 'My AI studio. Audits, implementations and training for companies that want AI running in their operations, not in a slide deck. If you want to build something with me, this is the front door.',
+    year: '2026 — now',
+    role: 'Founder',
+    bg: '#111113',
+    fg: '#F5F5F7',
+    accent: '#FFD60A',
+    href: 'https://buildylab.com',
   },
   {
     name: 'Pampa Boats',
@@ -37,6 +40,17 @@ const projects = [
     fg: '#FFFFFF',
     accent: '#FFE066',
     href: 'https://pampaboats.com',
+  },
+  {
+    name: 'Flipr',
+    tagline: 'Spotting deals across borders, in seconds.',
+    description: 'A multi-module deal-hunting platform — used motorcycles on Wallapop, cars from Germany to Spain, last-minute boat rentals, and a few more under the hood. Scrapers, scoring, alerts. Built ~90% with AI agents.',
+    year: '2025 — now',
+    role: 'Solo founder',
+    bg: '#FF5C28',
+    fg: '#FFFFFF',
+    accent: '#FFE7DA',
+    href: 'https://flipr.jferreiros.com',
   },
   {
     name: 'Argenpats',
@@ -52,23 +66,33 @@ const projects = [
 ];
 
 const timeline = [
-  { year: '2025', title: 'Product engineer', org: 'Vivla', detail: 'Co-ownership of vacation homes.' },
-  { year: '2024', title: 'Full-stack developer', org: 'Meetoptics', detail: 'Marketplace de productos ópticos para investigadores.' },
-  { year: '2021', title: 'Full-stack developer', org: 'Emailing Network', detail: 'React · TypeScript · Symfony · AWS · Docker · K8s.' },
-  { year: '2018', title: 'Web designer', org: 'Dixson Marketing · Freelance', detail: 'Sitios y branding para clientes.' },
-  { year: '2017', title: 'Administrative', org: 'Centro ERI', detail: 'Pre-código. Atención al cliente, gestión.' },
-  { year: '2014', title: 'Bachiller en Ciencias Sociales', org: 'Verbo Divino · Argentina', detail: 'Cambridge B2 in English.' },
+  { year: '2026', title: 'AI Product Engineer', org: 'Vivla', detail: 'Agentic AI features — Mastra · Vercel AI SDK · Langfuse. AI-native workflow with Claude Code, Cursor and Conductor.' },
+  { year: '2025', title: 'Full Stack Developer AI', org: 'Vivla', detail: 'Consumer mobile app from scratch (React Native + Expo, 300+ clients) and an internal product suite for operations and marketing.' },
+  { year: '2024', title: 'Full-stack developer', org: 'Meetoptics', detail: 'Marketplace of optical products for scientists. Vue.js · Node.js · AWS.' },
+  { year: '2021', title: 'Full-stack developer', org: 'Emailing Network', detail: 'Systems behind 5M+ marketing emails a day. React · TypeScript · Symfony · AWS · Docker · K8s.' },
+  { year: '2018', title: 'Web designer', org: 'Dixson Marketing · Freelance', detail: 'Sites and branding for clients.' },
+  { year: '2012', title: 'First website, age 16', org: 'Self-taught', detail: 'HTML, CSS and a lot of curiosity. Never stopped building since.' },
+];
+
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/jferreiros' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joaquin-ferreiros' },
+  { label: 'X / Twitter', href: 'https://twitter.com/jferreiros' },
 ];
 ---
 
-<Layout title="Joaquín Ferreiros — Designer-turned-engineer" singlePage={true}>
+<Layout title="Joaquín Ferreiros — AI Product Engineer & Founder" singlePage={true}>
   <IdentityOrb />
   <nav class="topnav">
     <a href="#top" class="topnav-logo">Joaquín Ferreiros</a>
     <div class="topnav-links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
+      <a href="#engineer">Engineer</a>
+      <a href="#founder">Founder</a>
       <a href="#contact">Contact</a>
+      <span class="topnav-sep" aria-hidden="true"></span>
+      {socials.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener" class="topnav-social">{s.label === 'X / Twitter' ? 'X' : s.label}</a>
+      ))}
     </div>
   </nav>
 
@@ -80,13 +104,13 @@ const timeline = [
       <span class="reveal hero-accent">Ferreiros.</span>
     </h1>
     <p class="hero-sub reveal">
-      Designer-turned-engineer building software in Barcelona.
-      Currently shipping product at <a href="https://vivla.com">Vivla</a>.
-      Side projects on the boil.
+      AI Product Engineer in Barcelona. By day I ship agentic product at
+      <a href="https://vivla.com">Vivla</a>; the rest of the time I build my own
+      ventures — software and beyond.
     </p>
     <div class="hero-actions reveal">
-      <a href="#work" class="button primary">See selected work →</a>
-      <a href="#contact" class="button secondary">Get in touch</a>
+      <a href="#engineer" class="button primary">The engineer →</a>
+      <a href="#founder" class="button secondary">The founder →</a>
     </div>
     <div class="scroll-hint">Scroll</div>
   </section>
@@ -95,22 +119,26 @@ const timeline = [
     <div class="now-inner">
       <span class="section-num reveal">01 / Now</span>
       <h2 class="now-title">
-        <span class="reveal">Right now,</span>
-        <span class="reveal now-strong">I'm helping eight families own one home — together.</span>
+        <span class="reveal">Two sides,</span>
+        <span class="reveal now-strong">one builder.</span>
       </h2>
       <div class="now-body reveal">
         <p>
-          At <strong>Vivla</strong>, I work on the product that turns co-ownership of vacation homes into something simple. Tooling for ownership, scheduling, the quiet logistics that make it feel effortless.
+          By trade I'm an <strong>engineer</strong>: at <strong>Vivla</strong> I own features end to end — talking to users, designing the UX, shipping to production — and right now I'm building the company's first agentic AI features.
         </p>
         <p>
-          On the side, I run <strong>Pampa Boats</strong> — two real boats rented on the Catalan coast — and I'm building <strong>Flipr</strong>, a deal-hunting platform across cars, motorcycles and rentals.
+          By nature I'm a <strong>founder</strong>: I run <strong>Pampa Boats</strong> with my partner, build products like <strong>Flipr</strong>, and through <strong>Buildylab</strong> I help companies put AI to work in their operations.
         </p>
       </div>
     </div>
   </section>
 
-  <WorkSection projects={projects} />
-
+  <WorkSection
+    projects={engineerProjects}
+    id="engineer"
+    num="02 / The engineer"
+    title="Where I work."
+  />
 
   <section class="experience" data-orb-tint="mint">
     <div class="experience-inner">
@@ -137,9 +165,18 @@ const timeline = [
       <h2 class="stack-h2 reveal">Tools I reach for.</h2>
       <div class="stack-grid">
         <div class="stack-col reveal">
+          <h4>AI & Agents</h4>
+          <ul>
+            <li>Mastra · Vercel AI SDK</li>
+            <li>Langfuse</li>
+            <li>OpenAI · Anthropic APIs</li>
+            <li>Claude Code · Cursor · Conductor</li>
+          </ul>
+        </div>
+        <div class="stack-col reveal">
           <h4>Frontend</h4>
           <ul>
-            <li>React · Vue · Astro</li>
+            <li>React · React Native · Astro</li>
             <li>TanStack Router · Query</li>
             <li>Tailwind CSS</li>
             <li>TypeScript</li>
@@ -155,33 +192,43 @@ const timeline = [
           </ul>
         </div>
         <div class="stack-col reveal">
-          <h4>Tools</h4>
+          <h4>Infra</h4>
           <ul>
             <li>AWS · Vercel · Coolify</li>
             <li>Docker · Kubernetes</li>
-            <li>Bitbucket · GitHub Actions</li>
-            <li>Figma · Pencil</li>
+            <li>Cloudflare</li>
+            <li>GitHub Actions</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <WorkSection
+    projects={ventureProjects}
+    id="founder"
+    num="05 / The founder"
+    title="What I'm building."
+    showToggle={false}
+  />
+
   <section id="contact" class="contact" data-orb-tint="orange" data-orb-dark="true">
     <div class="contact-inner">
-      <span class="section-num reveal">05 / Get in touch</span>
+      <span class="section-num reveal">06 / Get in touch</span>
       <h2 class="contact-h2">
         <span class="reveal">Got a project</span>
         <span class="reveal contact-accent">worth shipping?</span>
       </h2>
       <p class="contact-sub reveal">
-        I'm picky about what I take on, but always up to chat. Email is the fastest path.
+        Want AI working in your business? That's <a href="https://buildylab.com" class="contact-inline-link">Buildylab</a>.
+        Want me on your team? Email is the fastest path.
       </p>
       <a href="mailto:hi@jferreiros.com" class="contact-cta reveal">hi@jferreiros.com →</a>
       <div class="contact-links reveal">
-        <a href="https://github.com/jferreiros" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/jferreiros" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://twitter.com/jferreiros" target="_blank" rel="noopener">Twitter</a>
+        {socials.map((s) => (
+          <a href={s.href} target="_blank" rel="noopener">{s.label}</a>
+        ))}
+        <a href="https://buildylab.com" target="_blank" rel="noopener">Buildylab</a>
       </div>
     </div>
     <footer class="bottom-footer">
@@ -255,6 +302,18 @@ const timeline = [
   .topnav-links a:hover {
     color: var(--fg);
     opacity: 1;
+  }
+
+  .topnav-sep {
+    width: 1px;
+    height: 1rem;
+    background: var(--hairline);
+    align-self: center;
+  }
+
+  .topnav-social {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem !important;
   }
 
   .hero {
@@ -683,6 +742,18 @@ const timeline = [
     max-width: 36rem;
     margin-bottom: 3rem;
     letter-spacing: -0.01em;
+  }
+
+  .contact-inline-link {
+    color: #F5F5F7;
+    border-bottom: 1px solid rgba(245, 245, 247, 0.4);
+    padding-bottom: 1px;
+  }
+
+  .contact-inline-link:hover {
+    color: var(--brand-orange);
+    border-color: var(--brand-orange);
+    opacity: 1;
   }
 
   .contact-cta {
