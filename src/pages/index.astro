@@ -8,10 +8,10 @@ import ScrollRail from '../components/ScrollRail.astro';
 const railItems = [
   { id: 'top', label: 'Home' },
   { id: 'about', label: 'Now' },
-  { id: 'engineer', label: 'AI Product Engineer' },
+  { id: 'engineer', label: 'My work' },
   { id: 'trail', label: 'Trail' },
   { id: 'stack', label: 'Stack' },
-  { id: 'ventures', label: 'Ventures' },
+  { id: 'ventures', label: 'My ventures' },
   { id: 'side-quests', label: 'Side quests' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -98,8 +98,8 @@ const socials = [
   <nav class="topnav">
     <a href="#top" class="topnav-logo">Joaquín Ferreiros</a>
     <div class="topnav-links">
-      <a href="#engineer">AI Product Engineer</a>
-      <a href="#ventures">Ventures</a>
+      <a href="#engineer">My work</a>
+      <a href="#ventures">My ventures</a>
       <a href="#contact">Contact</a>
       <span class="topnav-sep" aria-hidden="true"></span>
       {socials.map((s) => (
@@ -121,10 +121,10 @@ const socials = [
       ventures — software and beyond.
     </p>
     <div class="hero-actions reveal">
-      <a href="#engineer" class="button primary">AI Product Engineer →</a>
+      <a href="#engineer" class="button primary">My work →</a>
       <a href="#ventures" class="button secondary">My ventures →</a>
+      <div class="scroll-hint">Scroll</div>
     </div>
-    <div class="scroll-hint">Scroll</div>
   </section>
 
   <section id="about" class="now-section" data-orb-tint="sky">
@@ -303,8 +303,8 @@ const socials = [
     left: 0;
     right: 0;
     z-index: 50;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     backdrop-filter: saturate(180%) blur(20px);
@@ -313,8 +313,6 @@ const socials = [
   }
 
   .topnav-logo {
-    grid-column: 2;
-    justify-self: center;
     color: var(--fg);
     font-weight: 600;
     font-size: 0.95rem;
@@ -324,8 +322,6 @@ const socials = [
   .topnav-logo:hover { opacity: 0.7; }
 
   .topnav-links {
-    grid-column: 3;
-    justify-self: end;
     display: flex;
     gap: 2rem;
   }
@@ -422,15 +418,19 @@ const socials = [
   }
 
   .scroll-hint {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 2rem;
+    align-self: center;
+    margin-left: 0.75rem;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--fg-soft);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     animation: bob 2.4s ease-in-out infinite;
+  }
+
+  .scroll-hint::after {
+    content: ' ↓';
   }
 
   @keyframes bob {
@@ -872,9 +872,8 @@ const socials = [
   }
 
   @media (max-width: 768px) {
-    .topnav { padding: 0.875rem 1.25rem; grid-template-columns: 1fr; }
-    .topnav-logo { display: none; }
-    .topnav-links { grid-column: 1; justify-self: center; gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
+    .topnav { padding: 0.875rem 1.25rem; }
+    .topnav-links { gap: 1.25rem; flex-wrap: wrap; justify-content: flex-end; }
     .topnav-links a { font-size: 0.8125rem; }
     .hero, .now-section, .work-header, .project, .experience, .stack, .contact {
       padding-left: 1.25rem;
