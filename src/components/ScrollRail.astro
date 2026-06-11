@@ -1,0 +1,123 @@
+---
+interface Item {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<aside class="scroll-rail" aria-label="Page index">
+  {items.map((item, i) => (
+    <a href={`#${item.id}`} class="rail-item" data-target={item.id}>
+      <span class="rail-label">{item.label}</span>
+      <span class="rail-num">{String(i + 1).padStart(2, '0')}</span>
+      <span class="rail-tick" aria-hidden="true"></span>
+    </a>
+  ))}
+</aside>
+
+<script>
+  const railItems = document.querySelectorAll<HTMLAnchorElement>('.rail-item');
+  if (railItems.length) {
+    const map = new Map<Element, HTMLAnchorElement>();
+    railItems.forEach((link) => {
+      const target = document.getElementById(link.dataset.target || '');
+      if (target) map.set(target, link);
+    });
+
+    const setActive = (link: HTMLAnchorElement) => {
+      railItems.forEach((l) => l.classList.toggle('is-active', l === link));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const link = map.get(entry.target);
+            if (link) setActive(link);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 },
+    );
+
+    map.forEach((_link, section) => observer.observe(section));
+  }
+</script>
+
+<style>
+  .scroll-rail {
+    position: fixed;
+    right: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    mix-blend-mode: difference;
+  }
+
+  .rail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .rail-tick {
+    width: 16px;
+    height: 1.5px;
+    background: #fff;
+    opacity: 0.35;
+    transition: width 280ms cubic-bezier(0.32, 0.72, 0, 1), opacity 280ms ease;
+  }
+
+  .rail-num {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 280ms ease, transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .rail-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 280ms ease, transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .rail-item:hover .rail-tick,
+  .rail-item.is-active .rail-tick {
+    width: 32px;
+    opacity: 1;
+  }
+
+  .rail-item:hover .rail-num,
+  .rail-item.is-active .rail-num,
+  .rail-item:hover .rail-label,
+  .rail-item.is-active .rail-label {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+
+  .rail-item { opacity: 1; }
+  .rail-item:hover { opacity: 1; }
+
+  @media (max-width: 1024px) {
+    .scroll-rail { display: none; }
+  }
+</style>
